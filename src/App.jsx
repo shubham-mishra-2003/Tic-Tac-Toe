@@ -5,6 +5,8 @@ import Status from './components/status';
 import { winnerCalculate } from './winner';
 import History from './components/history';
 
+const new_game = [{ squares: Array(9).fill(null), isXNext: false }];
+
 function App() {
   //To save history of game
   const [history, setHistory] = useState([
@@ -56,13 +58,27 @@ function App() {
     setcurrentMove(move);
   };
 
+  const gameReset = () => {
+    setHistory(new_game);
+    setcurrentMove(0);
+  };
+
   return (
     <div className="container">
       <h1 id="title">TicTacToe Game | shubham.mishra</h1>
-      <div className="playerName">
-        <h2>
-          <Status winner={winner} gameBoard={gameBoard} />
-        </h2>
+      <div className="heading">
+        <div className="playerName">
+          <h2>
+            <Status winner={winner} gameBoard={gameBoard} />
+          </h2>
+        </div>
+        <button
+          type="button"
+          className={`resetBtn ${winner ? 'active' : ''}`}
+          onClick={gameReset}
+        >
+          Start New Game
+        </button>
       </div>
       <div className="mainGame">
         <Board squares={gameBoard.squares} clickHandler={clickHandler} />

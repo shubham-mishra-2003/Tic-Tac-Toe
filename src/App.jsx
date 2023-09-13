@@ -1,62 +1,73 @@
 import { useState } from 'react';
 import './styles.scss';
-import Board from "./components/board";
+import Board from './components/board';
+import Status from './components/status';
 import { winnerCalculate } from './winner';
+import History from './components/history';
 
-function App(){
+function App() {
+  //To save history of game
+  const [history, setHistory] = useState([
+    { squares: Array(9).fill(null), isXNext: false },
+  ]);
 
-  const [squares, setSquares] = useState(Array(9).fill(null));
-  const [isXNext, setIsXNext] = useState(false);
+  const [currentMove, setcurrentMove] = useState(0);
 
-  const clickHandler = clickedPosition => {
-    //To ensure that X and O doesn't change on clicking again on a filled index
-    //To stop the function after having a winner
-    if(squares[clickedPosition] || winner){
-        return;
+  const gameBoard = history[currentMove];
+  //To show winner message.
+  const winner = winnerCalculate(gameBoard.squares);
+
+  //To stop the clicking of boxes after getting either winner or getting al boxes filled.
+  const clickHandler = positionsClicked => {
+    if (gameBoard.squares[positionsClicked] || winner) {
+      return;
     }
+    setHistory(currentHistory => {
+      const traverse = currentMove + 1 != currentHistory.length;
 
-    //To print X and O on clicking.
-    setSquares(currentSquare => {
-      return currentSquare.map((squareValue, position) => {
-        if (clickedPosition === position) {
-          return isXNext ? 'X' : 'O';
+      const lastGameState = traverse
+        ? currentHistory[currentMove]
+        : currentHistory[currentHistory.length - 1];
+
+      const nextSquareState = lastGameState.squares.map(
+        (squareValue, position) => {
+          if (positionsClicked == position) {
+            return lastGameState.isXNext ? 'X' : 'O';
+          }
+          return squareValue;
         }
-        return squareValue;
+      );
+
+      const base = traverse
+        ? currentHistory.slice(0, currentHistory.indexOf(lastGameState) + 1)
+        : currentHistory;
+
+      return base.concat({
+        squares: nextSquareState,
+        isXNext: !lastGameState.isXNext,
       });
     });
 
-    //To neglect the booleans which means that if true then false and if false than true. It's used to envoke multiple player in the game, that's one's X then O on again clicking another square.
-    setIsXNext(currentIsXNext => !currentIsXNext);
+    //To ensure that the button don't clicks again after filling the array
+    setcurrentMove(move => move + 1);
   };
 
-  //To display winner.
-  const winner = winnerCalculate(squares);
-  
-  //To add message for turn of the player.
-  const turnMessage = isXNext ? 'X' : 'O';
-
-  //To display draw message
-  const draw = squares.every(squareValue => squareValue !== null);
-
-  //Winner, turn and draw display.
-  const status = () => {
-    if(!winner && !draw){
-      return <div className='message'>It's your Turn <span id='turn'>{turnMessage}</span></div>;
-    }
-    if(winner){
-      return <div className='message'><span id='winnermsg'>{winner}</span> Won &#129321;</div>;
-    }
-    if(!winner && draw){
-      return <div className='drawmsg'>Match Draw &#128542;</div>;
-    }
+  const moveto = move => {
+    setcurrentMove(move);
   };
+
   return (
     <div className="container">
-      <h1 id='title'>TicTacToe Game | shubham.mishra</h1>
-      <div className='playerName'>
-        <h2>{status()}</h2>
+      <h1 id="title">TicTacToe Game | shubham.mishra</h1>
+      <div className="playerName">
+        <h2>
+          <Status winner={winner} gameBoard={gameBoard} />
+        </h2>
       </div>
-      <Board squares={squares} clickHandler={clickHandler}/>
+      <div className="mainGame">
+        <Board squares={gameBoard.squares} clickHandler={clickHandler} />
+        <History history={history} moveto={moveto} currentMove={currentMove} />
+      </div>
     </div>
   );
 }

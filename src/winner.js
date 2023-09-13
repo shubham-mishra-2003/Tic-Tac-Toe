@@ -1,3 +1,5 @@
+//To display winner message.
+
 export function winnerCalculate(squares){
     const lines = [
         [0, 1, 2],

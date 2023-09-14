@@ -37,7 +37,6 @@ button {
   min-height: 100vh;
 }
 
-
 .heading {
   display: flex;
   color: black;
@@ -72,7 +71,7 @@ button {
       box-shadow: 0px 0px 30px#c300ff;
     }
   }
-  .resetBtn{
+  .resetBtn {
     color: #000000;
     border: 2px solid black;
     font-size: 1rem;
@@ -84,9 +83,9 @@ button {
     width: auto;
     padding: 3px;
     transition: all 0.3s;
-    &.active{
+    &.active {
       color: #eeff00;
-      background: linear-gradient(to bottom right, #61006c, #006365);;
+      background: linear-gradient(to bottom right, #61006c, #006365);
       border: none;
     }
   }
@@ -98,8 +97,16 @@ button {
   justify-content: space-between;
   align-items: center;
 }
+
+.colorX {
+  color: #ff7f08;
+}
+.colorO {
+  color: #dd00ff;
+}
+
 .board {
-  margin-top: 25px;
+  margin-top: 20px;
   background: #00fbff;
   border: 2px solid black;
   border-radius: 20px;
@@ -115,29 +122,24 @@ button {
       font-size: 2.5rem;
       padding: 0;
       overflow: hidden;
-      color: #000000;
       transition: all 0.2s;
-      &:last-child {
-        border-right: none;
-      }
-      &.winning {
-        animation: scaleText 1.4s infinite;
-        @keyframes scaleText {
-          0% {
-            transform: 2.5rem;
-          }
-          50% {
-            font-size: 3.5rem;
-          }
-          100% {
-            font-size: 2.5rem;
-          }
-        }
-      }
     }
   }
 }
-
+.won {
+  animation: scaleText 1.4s infinite;
+  @keyframes scaleText {
+    0% {
+      transform: 2.5rem;
+    }
+    50% {
+      font-size: 3.5rem;
+    }
+    100% {
+      font-size: 2.5rem;
+    }
+  }
+}
 .historydisplay {
   width: 300px;
   flex-direction: column;
@@ -214,11 +216,10 @@ button {
     flex-direction: column;
     font-size: 0.7rem;
   }
-  .resetBtn{
+  .resetBtn {
     font-size: 0.4rem;
     padding: 0;
   }
-  
 }
 
 /* Styles for screens between 600px and 900px wide */

@@ -17,7 +17,7 @@ function App() {
 
   const gameBoard = history[currentMove];
   //To show winner message.
-  const winner = winnerCalculate(gameBoard.squares);
+  const { winner, winningSquares } = winnerCalculate(gameBoard.squares);
 
   //To stop the clicking of boxes after getting either winner or getting al boxes filled.
   const clickHandler = positionsClicked => {
@@ -74,14 +74,20 @@ function App() {
         </div>
         <button
           type="button"
-          className={`resetBtn ${winner ? 'active' : ''}`}
+          className={`resetBtn ${
+            winner || gameBoard.squares.every(square => square) ? 'active' : ''
+          }`}
           onClick={gameReset}
         >
           Start New Game
         </button>
       </div>
       <div className="mainGame">
-        <Board squares={gameBoard.squares} clickHandler={clickHandler} />
+        <Board
+          squares={gameBoard.squares}
+          clickHandler={clickHandler}
+          winningSquares={winningSquares}
+        />
         <History history={history} moveto={moveto} currentMove={currentMove} />
       </div>
     </div>

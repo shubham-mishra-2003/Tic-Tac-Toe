@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const Status = ({ winner, gameBoard }) => {
   const { squares, isXNext } = gameBoard;
 
@@ -29,6 +31,11 @@ const Status = ({ winner, gameBoard }) => {
   };
 
   return <h2 className="statusmessage">{renderStatus()}</h2>;
+};
+
+Status.propTypes = {
+  winner: PropTypes.string,
+  gameBoard: PropTypes.object.isRequired,
 };
 
 export default Status;

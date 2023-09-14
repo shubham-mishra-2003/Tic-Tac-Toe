@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const History = ({ history, moveto, currentMove }) => {
   return (
     <div className="historydisplay">
@@ -19,6 +21,12 @@ const History = ({ history, moveto, currentMove }) => {
       </ul>
     </div>
   );
+};
+
+History.propTypes = {
+  history: PropTypes.array.isRequired,
+  moveto: PropTypes.func.isRequired, 
+  currentMove: PropTypes.number.isRequired,
 };
 
 export default History;

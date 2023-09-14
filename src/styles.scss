@@ -84,13 +84,16 @@ button {
     width: auto;
     padding: 3px;
     transition: all 0.3s;
+    box-shadow: 0px 0px 20px #000000;
     &.active {
       color: #fff;
+      box-shadow: 0px 0px 5px #d4ff00;
       background: linear-gradient(to bottom right, #61006c, #006365);
       border: none;
       transition: all 0.2s;
-      &:hover{
+      &:hover {
         color: #eeff00;
+        box-shadow: 0px 0px 20px#d4ff00;
       }
     }
   }
@@ -221,23 +224,26 @@ button {
     flex-direction: column;
     font-size: 0.7rem;
   }
-  .resetBtn {
-    font-size: 0.4rem;
-    padding: 0;
+  .heading {
+    margin-top: 20px;
+    .resetBtn{
+      font-size: 0.7rem;
+      height: 50px;
+      margin-top: 24%;
+    }
+    .playerName {
+      font-size: 1.2em;
+    }
   }
 }
 
 /* Styles for screens between 600px and 900px wide */
-@media (min-width: 370px) and (max-width: 720px) {
+@media (min-width: 370px) and (max-width: 530px) {
   .container {
     font-size: 0.9rem;
   }
-  .playerName {
-    font-size: 0.7rem;
-    margin-top: 110px;
-  }
   .board {
-    margin-top: 2%;
+    margin-top: 3%;
     .boardRow {
       .square {
         height: 60px;
@@ -248,6 +254,49 @@ button {
   .mainGame {
     flex-direction: column;
     font-size: 0.9rem;
+  }
+  .heading {
+    margin-top: 20px;
+    .resetBtn{
+      height: 50px;
+      margin-top: 30%;
+      font-size: 0.7rem;
+    }
+    .playerName {
+      font-size: 0.5em;
+      margin-top: 110px;
+    }
+  }
+}
+
+@media (min-width: 530px) and (max-width: 720px) {
+  .container {
+    font-size: 1rem;
+  }
+  .board {
+    margin-top: 3%;
+    .boardRow {
+      .square {
+        height: 60px;
+        width: 60px;
+      }
+    }
+  }
+  .mainGame {
+    flex-direction: column;
+    font-size: 0.9rem;
+  }
+  .heading {
+    margin-top: 20px;
+    .resetBtn{
+      height: 50px;
+      margin-top: 27%;
+      font-size: 0.8rem;
+    }
+    .playerName {
+      font-size: 0.6em;
+      margin-top: 110px;
+    }
   }
 }
 
@@ -271,5 +320,15 @@ button {
   .mainGame {
     flex-direction: column;
     font-size: 1rem;
+  }
+  .heading {
+    margin-top: 20px;
+    .resetBtn{
+      height: 70px;
+      margin-top: 24%;
+    }
+    .playerName {
+      font-size: 0.5em;
+    }
   }
 }

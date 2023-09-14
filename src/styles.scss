@@ -5,6 +5,7 @@ body {
   padding: 0;
   margin: 0;
   user-select: none;
+  scroll-behavior: smooth;
 }
 
 #title {
@@ -84,9 +85,13 @@ button {
     padding: 3px;
     transition: all 0.3s;
     &.active {
-      color: #eeff00;
+      color: #fff;
       background: linear-gradient(to bottom right, #61006c, #006365);
       border: none;
+      transition: all 0.2s;
+      &:hover{
+        color: #eeff00;
+      }
     }
   }
 }
